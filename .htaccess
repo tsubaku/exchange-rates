@@ -1,0 +1,26 @@
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+
+# Перенаправление с ДОМЕН на ДОМЕН/api
+#RewriteCond %{REQUEST_URI} ^/$
+#RewriteRule ^(.*)$ /api/$1 [R=301]
+
+#BASIC авторизация
+AuthType Basic
+AuthName "Password Protected Area"
+AuthUserFile c:/xampp/htdocs/_TestTasks/exchange-rates/.htpasswd
+Require valid-user
+
+
+#Если URI начинается с api/ то перенаправлять все запросы на index.php
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^api/(.*)$ index.php
+RewriteRule ^(.*)$ index.php
+
+#RewriteRule .* - [e=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+
+
